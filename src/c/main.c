@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "src/c/window.h"
+#include "src/c/bitmap.h"
 
 static void init() {
 

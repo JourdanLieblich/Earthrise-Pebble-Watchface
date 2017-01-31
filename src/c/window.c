@@ -1,9 +1,12 @@
 #include <pebble.h>
 #include "window.h"
+#include "bitmap.h"
 
 static Window*    s_window;
 static TextLayer* s_time_layer;
-static GFont s_time_font;
+//static GFont s_time_font;
+static BitmapLayer *s_background_layer;
+static GBitmap *s_background_bitmap;
 
 static void main_window_load(Window *window);
 static void main_window_unload(Window *window);
@@ -57,6 +60,16 @@ static void main_window_load(Window *window) {
   GRect bounds = layer_get_bounds(window_layer);
 
   
+  // Create GBitmap
+s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_EARTHRISE_BG);
+
+// Create BitmapLayer to display the GBitmap
+s_background_layer = bitmap_layer_create(bounds);
+
+// Set the bitmap onto the layer and add to the window
+bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
+
   
   
   // Create the TextLayer with specific bounds
@@ -82,5 +95,12 @@ static void main_window_load(Window *window) {
 }
 
 static void main_window_unload(Window *window) {
+  // Destroy GBitmap
+gbitmap_destroy(s_background_bitmap);
+
+// Destroy BitmapLayer
+bitmap_layer_destroy(s_background_layer);
+  
+  // Destroy text_layer
   text_layer_destroy(s_time_layer);
 }
