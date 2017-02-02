@@ -11,6 +11,12 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/Earthrise2Colour",
+                    "name": "EARTHRISE_2_COLOUR",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/Earthrise",
                     "name": "EARTHRISE_BG",
                     "targetPlatforms": null,

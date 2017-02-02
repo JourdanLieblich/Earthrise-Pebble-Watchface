@@ -61,7 +61,7 @@ static void main_window_load(Window *window) {
 
   
   // Create GBitmap
-s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_EARTHRISE_BG);
+s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_EARTHRISE_2_COLOUR);
 
 // Create BitmapLayer to display the GBitmap
 s_background_layer = bitmap_layer_create(bounds);
@@ -74,7 +74,7 @@ layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
   
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
+      GRect(0, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w,50));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
