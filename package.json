@@ -11,6 +11,12 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/Earthrise2Colour2",
+                    "name": "EARTHRISE_2C2",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/Earthrise2Colour",
                     "name": "EARTHRISE_2_COLOUR",
                     "targetPlatforms": null,
@@ -25,8 +31,10 @@
                 {
                     "characterRegex": "[0-9:.]",
                     "file": "fonts/Gobold Lowplus.ttf",
-                    "name": "GOBOLD_24",
-                    "targetPlatforms": null,
+                    "name": "GOBOLD_42",
+                    "targetPlatforms": [
+                        "diorite"
+                    ],
                     "type": "font"
                 }
             ]

@@ -1,9 +1,10 @@
 #include <pebble.h>
 #include "window.h"
 #include "bitmap.h"
+#include "vibeOnDisconnect.h"
 
 static Window*    s_window;
-static TextLayer* s_time_layer;
+static TextLayer *s_time_layer, *s_date_layer;
 //static GFont s_time_font;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
@@ -24,8 +25,17 @@ static void update_time() {
   strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
 
-  // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, s_buffer);
+  
+  //Date string and layer?
+  static char d_buffer[16];
+  strftime(d_buffer, sizeof(d_buffer), "%B %e", tick_time);
+  
+  text_layer_set_text(s_date_layer, d_buffer);
+  // Display this time on the TextLayer
+  
+  //bluetoothVerify(connection_service_peek_pebble_app_connection());
+  
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -61,7 +71,7 @@ static void main_window_load(Window *window) {
 
   
   // Create GBitmap
-s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_EARTHRISE_2_COLOUR);
+s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_EARTHRISE_2C2);
 
 // Create BitmapLayer to display the GBitmap
 s_background_layer = bitmap_layer_create(bounds);
@@ -72,10 +82,22 @@ layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 
   
   
+   // Create date TextLayer
+  s_date_layer = text_layer_create(GRect(-18, 55, 144, 30));
+  text_layer_set_text_color(s_date_layer, GColorWhite);
+  text_layer_set_background_color(s_date_layer, GColorClear);
+  text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
+  text_layer_set_text(s_date_layer, "September 23");
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_date_layer));
+  
+  
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w,50));
+      GRect(-22, PBL_IF_ROUND_ELSE(60, 65), bounds.size.w+50,50));
 
+
+  
+  
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
