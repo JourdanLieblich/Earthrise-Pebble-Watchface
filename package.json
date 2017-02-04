@@ -31,7 +31,7 @@
                 {
                     "characterRegex": "[0-9:.]",
                     "file": "fonts/Gobold Lowplus.ttf",
-                    "name": "GOBOLD_42",
+                    "name": "GOBOLD_48",
                     "targetPlatforms": [
                         "diorite"
                     ],
